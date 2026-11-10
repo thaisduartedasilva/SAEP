@@ -1,6 +1,7 @@
 <?php
 
-session_start();
+include "conexao.php";
+$resultado = mysqli_query ($conexao, "SELECT * FROM tarefa");
 
 ?>
 <html lang="en">
@@ -17,27 +18,27 @@ session_start();
         <h2>Cadastre uma nova tarefa!</h2>
         <form action="cadastrar.php" method="POST">
             <label for="descricao">Descrição: </label>
-            <input type="text" name="descricao" require>
+            <input type="text" name="descricao" required>
             <br>
             <label for="setor">Setor: </label>
-            <input type="text" name="setor" require>
+            <input type="text" name="setor" required>
             <br>
             <label for="prioridade" name="prioridade">Prioridade:</label>
-            <select name="prioridade" id="prioridade" require>
+            <select name="prioridade" id="prioridade" required>
                 <option value="baixa">Baixa</option>
                 <option value="media">Média</option>
                 <option value="alta">Alta</option>
             </select>
             <br>
             <label for="status" name="status">Status:</label>
-            <select name="status" id="status" require>
+            <select name="status" id="status" required>
                 <option value="a fazer">A fazer</option>
                 <option value="fazendo">Fazendo</option>
                 <option value="feito">Feito</option>
             </select>
             <br>
             <label for="data" name="data">Data: </label>
-            <input type="date" name="data" require>
+            <input type="date" name="data" required>
             <br>
             <button type="submit">Cadastrar</button>
         </form>
@@ -54,18 +55,18 @@ session_start();
                 <th>Data</th>
                 <th>Ação</th>
             </tr>
-            <?php while ($tarefas = mysqli_fetch_assoc($tarefa)){?>
+            <?php while($tarefas = mysqli_fetch_assoc($resultado)){?>
                 <tr>
-                    <td><?php echo $produtos["id"]?></td>
-                    <td><?php echo $produtos["usuario"]?></td>
-                    <td><?php echo $produtos["descricao"]?></td>
-                    <td><?php echo $produtos["setor"]?></td>
-                    <td><?php echo $produtos["prioridade"]?></td>
-                    <td><?php echo $produtos["status"]?></td>
-                    <td><?php echo $produtos["data"]?></td>
+                    <td><?php echo $tarefas["id"]?></td>
+                    <td><?php echo $tarefas["id_usuario"]?></td>
+                    <td><?php echo $tarefas["descricao"]?></td>
+                    <td><?php echo $tarefas["setor"]?></td>
+                    <td><?php echo $tarefas["prioridade"]?></td>
+                    <td><?php echo $tarefas["status"]?></td>
+                    <td><?php echo $tarefas["data"]?></td>
                     <td>
-                        <a href="editar.php?id=<?php echo $produtos["id"]?>">Editar</a>
-                        <a href="excluir.php?id=<?php echo $produtos["id"]?>">Excluir</a>
+                        <a href="editar.php?id=<?php echo $tarefas["id"]?>">Editar</a>
+                        <a href="excluir.php?id=<?php echo $tarefas["id"]?>">Excluir</a>
                     </td>
                 </tr>
             <?php } ?>

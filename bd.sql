@@ -13,7 +13,7 @@ CREATE TABLE tarefa (
     descricao TEXT NOT NULL,
     setor TEXT NOT NULL,
     prioridade ENUM ('baixa', 'media', 'alta') NOT NULL,
-    data DATETIME NOT NULL,
+    data DATE NOT NULL,
     status ENUM ('a fazer', 'fazendo', 'feito') NOT NULL DEFAULT 'a fazer',
     id_usuario INT, 
     FOREIGN KEY (id_usuario) REFERENCES usuario(id)   
