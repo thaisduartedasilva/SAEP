@@ -4,7 +4,8 @@ USE saep_teste;
 CREATE TABLE usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(500) NOT NULL,
-    email VARCHAR(500) NOT NULL
+    email VARCHAR(500) NOT NULL,
+    senha VARCHAR(500) NOT NULL
 );
 
 CREATE TABLE tarefa (
@@ -17,3 +18,6 @@ CREATE TABLE tarefa (
     id_usuario INT, 
     FOREIGN KEY (id_usuario) REFERENCES usuario(id)   
 );
+
+INSERT INTO usuario (nome, email, senha) VALUES 
+('thais', 'thais@gmail.com', 'thais123');
