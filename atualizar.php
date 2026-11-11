@@ -10,9 +10,13 @@ $data = $_POST["data"];
 
 $sql = "UPDATE tarefa SET descricao = ?, setor = ?, prioridade= ?, status= ?, data= ? WHERE id = ?";
 
-$stmt = mysqli_prepare($conxao, $sql);
-mysqli_stmt_bind_param($stmt, "sssssi", $descricao, $setor, $prioridade, $status, $data, $id);
-mysqli_stmt_execute($stmt);
+$stmt = $conexao->prepare($sql);
+
+$stmt->bind_param("sssssi", $descricao, $setor, $prioridade, $status, $data, $id);
+
+$stmt->execute();
 
 header("Location: tela_inicial.php");
+exit;
+
 ?>

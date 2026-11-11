@@ -1,6 +1,6 @@
 <?php
 
-include "caonexao.php";
+include "conexao.php";
 
 $id = $_GET["id"];
 
@@ -9,6 +9,8 @@ $sql = "SELECT * FROM tarefa WHERE id = ?";
 $stmt = mysqli_prepare($conexao, $sql);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
+
+$resultado = mysqli_stmt_get_result($stmt);
 
 $tarefas = mysqli_fetch_assoc($resultado);
 
@@ -27,6 +29,7 @@ $tarefas = mysqli_fetch_assoc($resultado);
     <main>
         <h2>Edite uma tarefa!</h2>
         <form action="atualizar.php" method="POST">
+        <input type="hidden" name="id" value="<?php echo $tarefas["id"] ?>">
             <label for="descricao">Descrição: </label>
             <input type="text" name="descricao" required>
             <br>
@@ -50,7 +53,7 @@ $tarefas = mysqli_fetch_assoc($resultado);
             <label for="data" name="data">Data: </label>
             <input type="date" name="data" required>
             <br>
-            <button type="submit">Cadastrar</button>
+            <button type="submit">Atualizar</button>
         </form>
     </main>
     
